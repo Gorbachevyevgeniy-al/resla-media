@@ -133,7 +133,8 @@
   "code": null,
   "theme": "Clay или Paste",
   "caption_text": null,
-  "src": "schedule_2026-10-26.json"
+  "src": "schedule_2026-10-26.json",
+  "note": "снят 28.10: заменён сториз «Новый пост» к посту дня"
  },
  "w30-s12": {
   "id": "w30-s12",
@@ -157,7 +158,7 @@
   "theme": "Пост недели: пудры",
   "caption_text": null,
   "src": "schedule_2026-10-26.json",
-  "note": "перенос 27.10: новый график 3 поста / 4 рилса / 5 сториз в неделю"
+  "note": "снят 28.10: заменён сториз «Новый пост» к посту дня"
  },
  "w31-s12": {
   "id": "w31-s12",
@@ -168,7 +169,8 @@
   "code": null,
   "theme": "Вопрос недели",
   "caption_text": null,
-  "src": "schedule_2026-10-26.json"
+  "src": "schedule_2026-10-26.json",
+  "note": "снят 28.10: заменён сториз «Новый пост» к посту дня"
  },
  "w31-s20": {
   "id": "w31-s20",
@@ -180,7 +182,7 @@
   "theme": "Пост недели: Wax Clay",
   "caption_text": null,
   "src": "schedule_2026-10-26.json",
-  "note": "перенос 27.10: новый график 3 поста / 4 рилса / 5 сториз в неделю"
+  "note": "снят 28.10: заменён сториз «Новый пост» к посту дня"
  },
  "w01-s12": {
   "id": "w01-s12",
@@ -944,5 +946,41 @@
   "theme": "Новый рилс: воск-стик (замена тизера пудры)",
   "url": "https://raw.githubusercontent.com/Gorbachevyevgeniy-al/resla-media/main/posts/2026-10/sinep-w-28-s-stick.jpg",
   "note": "28.10 по просьбе Евгения вместо тизера пудры"
+ },
+ "w29-s-new": {
+  "utc": "2026-10-29T04:30:00Z",
+  "kind": "story",
+  "fmt": "Сториз",
+  "code": "",
+  "theme": "Новый пост: Матовый воск S8",
+  "url": "https://raw.githubusercontent.com/Gorbachevyevgeniy-al/resla-media/main/posts/2026-10/sinep-w-29-s-new.jpg",
+  "note": "28.10: сториз дня совпадает с постом дня (просьба Евгения)"
+ },
+ "w31-s-new": {
+  "utc": "2026-10-31T14:30:00Z",
+  "kind": "story",
+  "fmt": "Сториз",
+  "code": "",
+  "theme": "Новый пост: Какая фиксация вам нужна",
+  "url": "https://raw.githubusercontent.com/Gorbachevyevgeniy-al/resla-media/main/posts/2026-10/sinep-w-31-s-new.jpg",
+  "note": "28.10: сториз дня совпадает с постом дня (просьба Евгения)"
+ },
+ "w03-s-new": {
+  "utc": "2026-11-03T04:30:00Z",
+  "kind": "story",
+  "fmt": "Сториз",
+  "code": "",
+  "theme": "Новый пост: Воск Forming",
+  "url": "https://raw.githubusercontent.com/Gorbachevyevgeniy-al/resla-media/main/posts/2026-10/sinep-w-03-s-new.jpg",
+  "note": "28.10: сториз дня совпадает с постом дня (просьба Евгения)"
+ },
+ "w05-s-new": {
+  "utc": "2026-11-05T04:30:00Z",
+  "kind": "story",
+  "fmt": "Сториз",
+  "code": "",
+  "theme": "Новый пост: Оттеночный воск Black",
+  "url": "https://raw.githubusercontent.com/Gorbachevyevgeniy-al/resla-media/main/posts/2026-10/sinep-w-05-s-new.jpg",
+  "note": "28.10: сториз дня совпадает с постом дня (просьба Евгения)"
  }
 }
