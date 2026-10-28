@@ -2,7 +2,7 @@
 # расписание, подписи и медиа берутся из этого публичного репозитория. Маркер берётся из переменной IG_ACCESS_TOKEN.
 # Запуск в любой облачной сессии:
 #   curl -fsSL https://raw.githubusercontent.com/Gorbachevyevgeniy-al/resla-media/main/autopost/run_slot.py -o /tmp/run_slot.py && python3 /tmp/run_slot.py <id> [<id> ...]
-# Несколько id публикуются по очереди с паузой 60 с (пачки сториз). Уже вышедший пост/рилс (та же подпись) не публикуется второй раз.
+# kind: post | story | reel | carousel (у карусели url — список картинок). Несколько id публикуются по очереди с паузой 60 с (пачки сториз). Уже вышедший пост/рилс (та же подпись) не публикуется второй раз.
 import datetime, json, os, sys, time, urllib.parse, urllib.request
 RAW='https://raw.githubusercontent.com/Gorbachevyevgeniy-al/resla-media/main/autopost/slots.json'
 B='https://graph.instagram.com/v23.0'; U='17841461175377751'; T=os.environ['IG_ACCESS_TOKEN']
@@ -24,6 +24,13 @@ def already_out(cap):
         if (m.get('caption') or '').strip()[:120]==head: return m
     return None
 
+def wait(c, n):
+    for _ in range(n):
+        st=call('GET', c, fields='status_code')['status_code']
+        if st=='FINISHED': return
+        if st in ('ERROR','EXPIRED'): raise Fail(f'container {c}: {st}')
+        time.sleep(5)
+
 def publish(s):
     cap=s.get('caption_text')
     if cap and s['kind']!='story':
@@ -31,16 +38,17 @@ def publish(s):
         if m: return {'skipped':'already published', **m}
     if s['kind']=='reel':
         p={'media_type':'REELS','video_url':s['url'],'share_to_feed':'true','thumb_offset':str(s['thumb'] if s.get('thumb') is not None else 1000)}
+    elif s['kind']=='carousel':
+        # Карусель: url — список картинок (2–10), каждая отдельным контейнером is_carousel_item, затем общий контейнер CAROUSEL
+        kids=[call('POST', f'{U}/media', image_url=u, is_carousel_item='true')['id'] for u in s['url']]
+        for k in kids: wait(k, 30)
+        p={'media_type':'CAROUSEL','children':','.join(kids)}
     else:
         p={'image_url':s['url']}
         if s['kind']=='story': p['media_type']='STORIES'
     if cap: p['caption']=cap
     c=call('POST', f'{U}/media', **p)['id']
-    for _ in range(120 if s['kind']=='reel' else 30):
-        st=call('GET', c, fields='status_code')['status_code']
-        if st=='FINISHED': break
-        if st in ('ERROR','EXPIRED'): raise Fail(f'container {c}: {st}')
-        time.sleep(5)
+    wait(c, 120 if s['kind']=='reel' else 30)
     # Instagram иногда отвечает «Media ID is not available» (код 9007) сразу после FINISHED: ждём и пробуем ещё
     for i in range(6):
         try: m=call('POST', f'{U}/media_publish', creation_id=c)['id']; break
